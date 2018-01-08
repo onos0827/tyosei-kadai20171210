@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<table>
+  <tr>
+    <th>イベント名</th>
+  </tr>
+    <td><a href="view/select.html" th:href="@{/view/answer/{eventName}(eventName=${map.get('EVENT_NAME')})}"><span th:text="${map.get('EVENT_NAME')}"></span></a></td>
+</table>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<form action="#" th:action="@{/view/create}" th:object="${inputForm}" method="post">
+		イベント名: <br><input type="text" th:field="*{eventName}"/></br>
+		<div style="display:inline-flex">
+		<p>コメント:<br><textarea th:field="*{remarks}" rows="8" cols="40">コメントを入力。</textarea></br></p>
+		<p>候補日: <br><textarea th:field="*{eventDate}" rows="8" cols="40">候補日を入力。</textarea></br></p>
+		</div>
+		<p><input type="submit" value="イベント登録" /> <input type="reset" value="リセット" /></p>
+	</form>
+</body>
+</html>

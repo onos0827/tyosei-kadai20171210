@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<form action="#" th:action="@{/view/createAtd}" th:object="${inputForm2}" method="post">
+		イベント名:<br><span th:text="${map.get('EVENT_NAME')}"></span></br>
+		<br></br>
+		イベントメモ:<br><span th:text="${map.get('EVENT_DATE')}"></span></br>
+        <br></br>
+	    氏名登録: <br><input type="text" th:field="*{name}"/></br>
+		<br></br>
+		<p>候補日: <span th:text="${map.get('EVENT_DATE')}"></span>
+		<label><input type="radio" value="〇" />〇</label>
+		<label><input type="radio" value="△" />△</label>
+		<label><input type="radio" value="×" />×</label>
+		</p>
+		<!-- <p>コメント:<br><textarea th:field="*{remarks}" rows="8" cols="40">コメントを入力。</textarea></br></p>-->
+		<p><input type="submit" value="出欠登録" /> <input type="reset" value="リセット" /></p>
+	</form>
+</body>
+</html>
+
