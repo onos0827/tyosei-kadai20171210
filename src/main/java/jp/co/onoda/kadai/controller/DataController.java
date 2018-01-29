@@ -22,15 +22,15 @@ public class DataController {
 	@Autowired
 	DataService service;
 
-	@RequestMapping("/")
-	public String index(){
-		return "index";
-	}
+	//@RequestMapping("/")
+	//public String index(){
+		//return "index";
+	//}
 
-	@RequestMapping("/view/input")
-	public String input(Model model){
+	@RequestMapping("/")
+	public String index(Model model){
 		model.addAttribute("inputForm", new DataForm());
-		return "view/input";
+		return "index";
 	}
 
 	@RequestMapping("/view/answer/{eventName}")
@@ -51,8 +51,10 @@ public class DataController {
     @PostMapping("/view/create")
 	public String create(@ModelAttribute @Validated DataForm eventdata, Model model){
     	Map<String, Object> result = service.create(eventdata);
+    	//Map<String, Object> date = service.createdate(eventdata);
 		model.addAttribute("map", result);
-		return "view/select";
+		//model.addAttribute("map", date);
+		return "view/create";
 	}
 
     @PostMapping("/view/createAtd")

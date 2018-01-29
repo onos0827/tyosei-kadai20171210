@@ -26,11 +26,22 @@ public class DataAccessor {
 
 		//  }
 
-	public int insertEventInfo(String eventName, String eventDate, String Remarks){
+	public int insertEventDATA(String eventName,String eventDate, String Remarks){
+
+		String[] datesplit = eventDate.split("\r\n");
 		int count = jdbcTemplate.update("INSERT INTO EVENT_DATA(EVENT_NAME,EVENT_DATE,REMARKS) VALUES(?,?,?)",
-				eventName, eventDate, Remarks);
+				eventName,datesplit,Remarks);
 		return count;
 	}
+
+	public int insertEventDATE(int eventId, String eventDate){
+		String[] datesplit = eventDate.split("\r\n");
+
+		int count = jdbcTemplate.update("INSERT INTO EVENT_DATE(EVENT_ID,SET_DATE) VALUES(SEQ_EVENT_ID,?)",
+				eventId,datesplit);
+		return count;
+	}
+
 
 	public int insertATDInfo(String name, String answer, String atdremarks){
 		int count = jdbcTemplate.update("INSERT INTO ATD_RESULT(NAME,ANSWER,ATD_REMARKS) VALUES(?,?,?)",
@@ -40,6 +51,11 @@ public class DataAccessor {
 
 	public Map<String, Object> getEventData(String eventName) {
 		Map<String, Object> row = jdbcTemplate.queryForMap("SELECT * FROM EVENT_DATA WHERE EVENT_NAME=?", eventName);
+		return row;
+	}
+
+	public Map<String, Object> getEventDate(String eventId) {
+		Map<String, Object> row = jdbcTemplate.queryForMap("SELECT * FROM EVENT_DATE WHERE EVENT_ID=?", eventId);
 		return row;
 	}
 

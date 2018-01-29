@@ -9,11 +9,7 @@ public class DataForm {
 
 	private String remarks;
 
-	private String name;
 
-	private String answer;
-
-	private String atdremarks;
 
 
 	public String getEventName() {
@@ -39,32 +35,6 @@ public class DataForm {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
-
-	public String getatdRemarks() {
-		return atdremarks;
-	}
-
-	public void setatdRemarks(String atdremarks) {
-		this.atdremarks = atdremarks;
-	}
-
 
 
 
