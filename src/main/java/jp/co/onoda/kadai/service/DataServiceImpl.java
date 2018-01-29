@@ -21,12 +21,14 @@ public class DataServiceImpl implements DataService {
 
 	@Override
 	public Map<String, Object> create(DataForm eventdata){
+		logger.info("create start: {}", eventdata);
+		int updateCount = accessor.insertEventDATA(
+				eventdata.getEventName(), eventdata.getEventDate(), eventdata.getRemarks());
+
+		logger.info("create count: {}", updateCount);
 		Map<String, Object> row = accessor.getEventData(eventdata.getEventName());
 		return row;
 	}
-
-
-
 
 	@Override
 	public Map<String, Object> get(String eventName) {

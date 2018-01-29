@@ -54,7 +54,7 @@ public class DataController {
     	//Map<String, Object> date = service.createdate(eventdata);
 		model.addAttribute("map", result);
 		//model.addAttribute("map", date);
-		return "view/create";
+		return "view/select";
 	}
 
     @PostMapping("/view/createAtd")
