@@ -51,9 +51,8 @@ public class DataController {
     @PostMapping("/view/create")
 	public String create(@ModelAttribute @Validated DataForm eventdata, Model model){
     	Map<String, Object> result = service.create(eventdata);
-    	//Map<String, Object> date = service.createdate(eventdata);
 		model.addAttribute("map", result);
-		//model.addAttribute("map", date);
+
 		return "view/select";
 	}
 

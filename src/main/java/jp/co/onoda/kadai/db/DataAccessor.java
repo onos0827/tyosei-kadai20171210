@@ -26,19 +26,18 @@ public class DataAccessor {
 
 		//  }
 
-	public int insertEventDATA(String eventName,String eventDate, String Remarks){
+	public int insertEventDATA(String eventId, String eventName,String Remarks){
 
-		String[] datesplit = eventDate.split("\r\n");
-		int count = jdbcTemplate.update("INSERT INTO EVENT_DATA(EVENT_NAME,EVENT_DATE,REMARKS) VALUES(?,?,?)",
-				eventName,datesplit,Remarks);
+		int count = jdbcTemplate.update("INSERT INTO EVENT_DATA(EVENT_ID,EVENT_NAME,REMARKS) VALUES(SEQ_EVENT_ID.nextval,?,?)",
+				eventName,Remarks);
 		return count;
 	}
 
-	public int insertEventDATE(int eventId, String eventDate){
-		String[] datesplit = eventDate.split("\r\n");
+	public int insertEventDATE(String eventId, String eventDate){
 
-		int count = jdbcTemplate.update("INSERT INTO EVENT_DATE(EVENT_ID,SET_DATE) VALUES(SEQ_EVENT_ID,?)",
-				eventId,datesplit);
+
+		int count = jdbcTemplate.update("INSERT INTO EVENT_DATE(EVENT_ID,SET_DATE) VALUES(SEQ_EVENT_ID.currval,?)",
+			eventDate);
 		return count;
 	}
 

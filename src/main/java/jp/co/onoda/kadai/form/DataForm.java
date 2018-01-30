@@ -3,6 +3,8 @@ package jp.co.onoda.kadai.form;
 //DATA
 public class DataForm {
 
+	private String eventId;
+
 	private String eventName;
 
 	private String eventDate;
@@ -10,6 +12,15 @@ public class DataForm {
 	private String remarks;
 
 
+
+
+	public String getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(String eventId) {
+		this.eventId = eventId;
+	}
 
 
 	public String getEventName() {
@@ -42,7 +53,7 @@ public class DataForm {
 
 	@Override
 	public String toString() {
-		return "DataForm [eventName=" + eventName + ", eventDate=" + eventDate + ", remarks=" + remarks +"]";
+		return "DataForm [eventId=" + eventId +", eventName=" + eventName + ", eventDate=" + eventDate + ", remarks=" + remarks +"]";
 	}
 
 
