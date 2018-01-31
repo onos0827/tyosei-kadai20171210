@@ -1,6 +1,5 @@
 package jp.co.onoda.kadai.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,18 +40,17 @@ public class DataController {
 		return "view/answer";
 	}
 
-	@RequestMapping("/view/list")
+	@RequestMapping("/view/answerRes")
 	public String list(Model model){
-		List<Map<String, Object>> result = service.list();
-		model.addAttribute("list", result);
-		return "view/list";
+		model.addAttribute("resultForm", new DataForm());
+		return "view/answerRes";
 	}
 
     @PostMapping("/view/create")
 	public String create(@ModelAttribute @Validated DataForm eventdata, Model model){
-    	Map<String, Object> result = service.create(eventdata);
-		model.addAttribute("map", result);
-
+    	Map<String, Object> ID = service.create(eventdata);
+    	String URL = "http://localhost:8080/view/answer" + ID.toString();
+		model.addAttribute("URL", URL);
 		return "view/select";
 	}
 

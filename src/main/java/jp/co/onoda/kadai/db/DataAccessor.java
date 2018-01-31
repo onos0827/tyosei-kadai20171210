@@ -55,7 +55,7 @@ public class DataAccessor {
 	}
 
 	public Map<String, Object> getEventData(String eventName) {
-		Map<String, Object> row = jdbcTemplate.queryForMap("SELECT * FROM EVENT_DATA WHERE EVENT_NAME=?", eventName);
+		Map<String, Object> row = jdbcTemplate.queryForMap("SELECT EVENT_ID FROM EVENT_DATA WHERE EVENT_NAME=?", eventName);
 		return row;
 	}
 

@@ -7,9 +7,13 @@
 <body>
 <table>
   <tr>
-    <th>イベント名</th>
+    <th>イベント登録完了</th>
   </tr>
-    <td><a href="view/select.html" th:href="@{/view/answer/{eventName}(eventName=${map.get('EVENT_NAME')})}"><span th:text="${map.get('EVENT_NAME')}"></span></a></td>
-</table>
+  </table>
+    	<p>出欠回答URL：<input type="text" size="30" th:value="*{URL}" /></p>
+
+<form action="#" th:action="@{/view/answerRes}" th:object="${resultForm}" method="post">
+		<p><input type="submit" value="出欠参照画面へ" /></p>
+</form>
 </body>
 </html>
