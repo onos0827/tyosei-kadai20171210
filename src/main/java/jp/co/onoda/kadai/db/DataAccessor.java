@@ -33,13 +33,19 @@ public class DataAccessor {
 		return count;
 	}
 
-	public int insertEventDATE(String eventId, String eventDate){
+	public String insertEventDATE(String eventId, String eventDate){
 
+		String[] datesplit = eventDate.split("\r?\n");
 
-		int count = jdbcTemplate.update("INSERT INTO EVENT_DATE(EVENT_ID,SET_DATE) VALUES(SEQ_EVENT_ID.currval,?)",
-			eventDate);
-		return count;
+		for(int i=0; i<datesplit.length; i++) {
+		 jdbcTemplate.update("INSERT INTO EVENT_DATE(EVENT_ID,SET_DATE) VALUES(SEQ_EVENT_ID.currval,?)",
+			datesplit[i]);
+		}
+		return null;
 	}
+
+
+
 
 
 	public int insertATDInfo(String name, String answer, String atdremarks){
