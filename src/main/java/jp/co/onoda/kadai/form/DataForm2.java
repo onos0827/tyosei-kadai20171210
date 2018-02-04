@@ -1,20 +1,48 @@
 package jp.co.onoda.kadai.form;
 
+import java.util.List;
+
 //DATA
 public class DataForm2 {
 
-	private String name;
+
+
+	private String eventID;
+
+	private String userID;
+
+	private String userName;
 
 	private String answer;
 
-	private String atdremarks;
+	private String userRemarks;
 
-	public String getName() {
-		return name;
+	private List<String> Radiobutton;
+
+
+	public String geteventID() {
+		return eventID;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void seteventID(String eventID) {
+		this.eventID = eventID;
+	}
+
+	public String getuserID() {
+		return userID;
+	}
+
+	public void setuserID(String userID) {
+		this.userID = userID;
+	}
+
+
+	public String getuserName() {
+		return userName;
+	}
+
+	public void setuserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getAnswer() {
@@ -25,13 +53,22 @@ public class DataForm2 {
 		this.answer = answer;
 	}
 
-	public String getAtdremarks() {
-		return atdremarks;
+	public String getuserRemarks() {
+		return userRemarks;
 	}
 
-	public void setAtdremarks(String atdremarks) {
-		this.atdremarks = atdremarks;
+	public void setuserRemarks(String userRemarks) {
+		this.userRemarks = userRemarks;
 	}
+
+	public List<String> getRadiobutton() {
+		return Radiobutton;
+	}
+
+	public void setRadiobutton(List<String> Radiobutton) {
+		this.Radiobutton = Radiobutton;
+	}
+
 }
 
 

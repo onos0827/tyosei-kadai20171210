@@ -1,5 +1,7 @@
 package jp.co.onoda.kadai.controller;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +34,13 @@ public class DataController {
 		return "index";
 	}
 
-	@RequestMapping("/view/answer/{eventName}")
-	public String view(@PathVariable(value="eventName") String eventName, Model model){
-			Map<String, Object> result = service.get(eventName);
+	@RequestMapping("/view/answer/[{eventID}]")
+	public String view(@PathVariable(value="eventID") String eventID, Model model){
+			Map<String, Object> result = service.get(eventID);
+			List<Map<String, Object>> resultdate = service.getdate(eventID);
+			model.addAttribute("eventID", eventID);
 			model.addAttribute("map", result);
+			model.addAttribute("date", resultdate);
 			model.addAttribute("inputForm2", new DataForm2());
 		return "view/answer";
 	}
@@ -49,14 +54,15 @@ public class DataController {
     @PostMapping("/view/create")
 	public String create(@ModelAttribute @Validated DataForm eventdata, Model model){
     	Map<String, Object> ID = service.create(eventdata);
-    	String URL = "http://localhost:8080/view/answer" + ID.toString();
+    	Collection<Object> IDD = ID.values();
+    	String URL = "http://localhost:8080/view/answer/" + IDD.toString();
 		model.addAttribute("URL", URL);
 		return "view/select";
 	}
 
-    @PostMapping("/view/createAtd")
-   	public String createAtd(@ModelAttribute @Validated DataForm atdresult, Model model){
-       	Map<String, Object> result = service.create(atdresult);
+    @PostMapping("/view/createAnswer")
+   	public String createAnswer(@ModelAttribute @Validated DataForm2 answer, Model model){
+       	Map<String, Object> result = service.createAnswer(answer);
    		model.addAttribute("map", result);
    		return "view/answer";
 

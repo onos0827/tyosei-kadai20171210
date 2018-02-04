@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import jp.co.onoda.kadai.db.DataAccessor;
 import jp.co.onoda.kadai.form.DataForm;
+import jp.co.onoda.kadai.form.DataForm2;
 
 @Service
 public class DataServiceImpl implements DataService {
@@ -30,20 +31,31 @@ public class DataServiceImpl implements DataService {
 	}
 
 	@Override
-	public Map<String, Object> get(String eventName) {
-		logger.info("get start");
-		Map<String, Object> row = accessor.getEventData(eventName);
-		logger.info("get end: {}", row);
+	public Map<String, Object> get(String eventID) {
+		Map<String, Object> row = accessor.getEventData2(eventID);
 		return row;
 	}
 
 	@Override
-	public List<Map<String, Object>> list() {
-		logger.info("list start");
-		List<Map<String, Object>> list = accessor.getEventInfo();
-		logger.info("list end: {}", list);
-		return list;
+	public List<Map<String, Object>> getdate(String eventID) {
+		List<Map<String, Object>> listdate = accessor.getEventDate(eventID);
+		return listdate;
 	}
+
+
+
+	@Override
+	public Map<String, Object> createAnswer(DataForm2 answer){
+		 accessor.insertUserDATA(
+				 answer.geteventID(), answer.getuserID(), answer.getuserName(),answer.getuserRemarks());
+
+		// accessor.insertAnswerDATA(
+		//		 answer.geteventID(), answer.getuserID(), answer.getuserName(),answer.getuserRemarks());
+		// Map<String, Object> row = accessor.getEventData(answer.getuserName());
+		 return null;
+
+	}
+
 
 
 }

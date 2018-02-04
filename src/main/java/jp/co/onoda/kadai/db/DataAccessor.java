@@ -35,7 +35,7 @@ public class DataAccessor {
 
 	public String insertEventDATE(String eventId, String eventDate){
 
-		String[] datesplit = eventDate.split("\r?\n");
+		String[] datesplit =eventDate.split("\r?\n");
 
 		for(int i=0; i<datesplit.length; i++) {
 		 jdbcTemplate.update("INSERT INTO EVENT_DATE(EVENT_ID,SET_DATE) VALUES(SEQ_EVENT_ID.currval,?)",
@@ -44,33 +44,41 @@ public class DataAccessor {
 		return null;
 	}
 
+	public int insertUserDATA(String eventID,String userID, String userName,String userRemarks){
 
-
-
-
-	public int insertATDInfo(String name, String answer, String atdremarks){
-		int count = jdbcTemplate.update("INSERT INTO ATD_RESULT(NAME,ANSWER,ATD_REMARKS) VALUES(?,?,?)",
-				name, answer, atdremarks);
+		int count = jdbcTemplate.update("INSERT INTO USER_DATA(EVENT_ID,USER_ID,USER_NAME,USER_REMARKS) VALUES(SEQ_EVENT_ID.currval,SEQ_USER_ID.nextval,?,?)",
+				userName,userRemarks);
 		return count;
 	}
+
+	public int insertAnswerDATA(String eventID,String userID, String eventDate,String answer){
+
+		int count = jdbcTemplate.update("INSERT INTO USER_DATA(EVENT_ID,USER_ID,USER_NAME,USER_REMARKS) VALUES(SEQ_EVENT_ID.currval,SEQ_USER_ID.currval,?,?)",
+				eventDate,answer);
+		return count;
+	}
+
+
+
 
 	public Map<String, Object> getEventData(String eventName) {
 		Map<String, Object> row = jdbcTemplate.queryForMap("SELECT EVENT_ID FROM EVENT_DATA WHERE EVENT_NAME=?", eventName);
 		return row;
 	}
 
-	public Map<String, Object> getEventDate(String eventId) {
-		Map<String, Object> row = jdbcTemplate.queryForMap("SELECT * FROM EVENT_DATE WHERE EVENT_ID=?", eventId);
+	public Map<String, Object> getEventData2(String eventID) {
+		Map<String, Object> row = jdbcTemplate.queryForMap("SELECT EVENT_NAME,REMARKS FROM EVENT_DATA WHERE EVENT_ID=?", eventID);
 		return row;
 	}
 
-	public List<Map<String,Object>> getEventInfo(){
-		List<Map<String, Object>> list = jdbcTemplate.queryForList("SELECT * FROM EVENT_DATA");
+	public List<Map<String,Object> >getEventDate(String eventID) {
+		List<Map<String, Object>> list = jdbcTemplate.queryForList("SELECT SET_DATE FROM EVENT_DATE WHERE EVENT_ID=?", eventID);
 		return list;
 	}
-
-	public Map<String, Object> getatdresult(String Name) {
-		Map<String, Object> row = jdbcTemplate.queryForMap("SELECT * FROM ATD_RESULT WHERE NAME=?", Name);
+	
+	public Map<String, Object> getUserData(String userName) {
+		Map<String, Object> row = jdbcTemplate.queryForMap("SELECT USER_NAME FROM EVENT_DATA WHERE EVENT_ID=?", userName);
 		return row;
 	}
+
 }
