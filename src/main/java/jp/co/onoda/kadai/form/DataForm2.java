@@ -19,6 +19,18 @@ public class DataForm2 {
 
 	private List<String> Radiobutton;
 
+	private String[] eventDate;
+
+
+
+
+	public String[] geteventDate() {
+		return eventDate;
+	}
+
+	public void seteventDate(String[] eventDate) {
+		this.eventDate = eventDate;
+	}
 
 	public String geteventID() {
 		return eventID;

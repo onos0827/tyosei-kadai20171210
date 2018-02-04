@@ -51,11 +51,13 @@ public class DataAccessor {
 		return count;
 	}
 
-	public int insertAnswerDATA(String eventID,String userID, String eventDate,String answer){
+	public String insertAnswerDATA(String eventID,String userID, String[] eventDate,String answer){
 
-		int count = jdbcTemplate.update("INSERT INTO USER_DATA(EVENT_ID,USER_ID,USER_NAME,USER_REMARKS) VALUES(SEQ_EVENT_ID.currval,SEQ_USER_ID.currval,?,?)",
-				eventDate,answer);
-		return count;
+		for(int i=0; i<eventDate.length; i++) {
+		jdbcTemplate.update("INSERT INTO ANSWER_DATA(EVENT_ID,USER_ID,SET_DATE,ANSWER) VALUES(SEQ_EVENT_ID.currval,SEQ_USER_ID.currval,?,?)",
+				eventDate[i],answer);
+		}
+		return null;
 	}
 
 
@@ -75,7 +77,7 @@ public class DataAccessor {
 		List<Map<String, Object>> list = jdbcTemplate.queryForList("SELECT SET_DATE FROM EVENT_DATE WHERE EVENT_ID=?", eventID);
 		return list;
 	}
-	
+
 	public Map<String, Object> getUserData(String userName) {
 		Map<String, Object> row = jdbcTemplate.queryForMap("SELECT USER_NAME FROM EVENT_DATA WHERE EVENT_ID=?", userName);
 		return row;

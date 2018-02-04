@@ -38,10 +38,10 @@ public class DataController {
 	public String view(@PathVariable(value="eventID") String eventID, Model model){
 			Map<String, Object> result = service.get(eventID);
 			List<Map<String, Object>> resultdate = service.getdate(eventID);
-			model.addAttribute("eventID", eventID);
 			model.addAttribute("map", result);
 			model.addAttribute("date", resultdate);
 			model.addAttribute("inputForm2", new DataForm2());
+			model.addAttribute("eventID", eventID);
 		return "view/answer";
 	}
 
@@ -61,7 +61,7 @@ public class DataController {
 	}
 
     @PostMapping("/view/createAnswer")
-   	public String createAnswer(@ModelAttribute @Validated DataForm2 answer, Model model){
+   	public String createAnswer(@ModelAttribute @Validated DataForm2 answer, DataForm eventdata, Model model){
        	Map<String, Object> result = service.createAnswer(answer);
    		model.addAttribute("map", result);
    		return "view/answer";

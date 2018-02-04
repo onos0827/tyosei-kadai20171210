@@ -49,9 +49,9 @@ public class DataServiceImpl implements DataService {
 		 accessor.insertUserDATA(
 				 answer.geteventID(), answer.getuserID(), answer.getuserName(),answer.getuserRemarks());
 
-		// accessor.insertAnswerDATA(
-		//		 answer.geteventID(), answer.getuserID(), answer.getuserName(),answer.getuserRemarks());
-		// Map<String, Object> row = accessor.getEventData(answer.getuserName());
+	//	accessor.insertAnswerDATA(
+	//			 answer.geteventID(), answer.getuserID(), answer.geteventDate(),answer.getAnswer());
+	//	 Map<String, Object> row = accessor.getEventData(answer.getuserName());
 		 return null;
 
 	}
