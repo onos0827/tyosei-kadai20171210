@@ -1,5 +1,6 @@
 package jp.co.onoda.kadai.form;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //DATA
@@ -13,11 +14,9 @@ public class DataForm2 {
 
 	private String userName;
 
-	private String answer;
-
 	private String userRemarks;
 
-	private List<String> Radiobutton;
+	private List<answer> radio;
 
 	private String[] eventDate;
 
@@ -57,13 +56,6 @@ public class DataForm2 {
 		this.userName = userName;
 	}
 
-	public String getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
 
 	public String getuserRemarks() {
 		return userRemarks;
@@ -73,15 +65,24 @@ public class DataForm2 {
 		this.userRemarks = userRemarks;
 	}
 
-	public List<String> getRadiobutton() {
-		return Radiobutton;
+
+
+	public List<answer> getRadio() {
+		   if (radio == null) {
+	            radio = new ArrayList<answer>();
+	                radio.add(new answer());
+
+		   }
+		return radio;
 	}
 
-	public void setRadiobutton(List<String> Radiobutton) {
-		this.Radiobutton = Radiobutton;
-	}
 
+
+	public void setRadio(List<jp.co.onoda.kadai.form.answer> radio) {
+		this.radio = radio;
+	}
 }
+
 
 
 

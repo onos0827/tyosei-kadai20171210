@@ -1,6 +1,7 @@
 package jp.co.onoda.kadai.controller;
 
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,11 +37,20 @@ public class DataController {
 
 	@RequestMapping("/view/answer/[{eventID}]")
 	public String view(@PathVariable(value="eventID") String eventID, Model model){
+		    model.addAttribute("inputForm2", new DataForm2());
 			Map<String, Object> result = service.get(eventID);
 			List<Map<String, Object>> resultdate = service.getdate(eventID);
+			Map<String, String> RadioMap = new LinkedHashMap<String, String>();
+
+			for(int i=0; i<resultdate.size(); i++) {
+			String str =resultdate.get(i).get("SET_DATE").toString();
+			RadioMap.put(str, "〇");
+			RadioMap.put(str, "△");
+			RadioMap.put(str, "×");
+			}
+			model.addAttribute("radio", RadioMap);
 			model.addAttribute("map", result);
 			model.addAttribute("date", resultdate);
-			model.addAttribute("inputForm2", new DataForm2());
 			model.addAttribute("eventID", eventID);
 		return "view/answer";
 	}
@@ -61,10 +71,10 @@ public class DataController {
 	}
 
     @PostMapping("/view/createAnswer")
-   	public String createAnswer(@ModelAttribute @Validated DataForm2 answer, DataForm eventdata, Model model){
-       	Map<String, Object> result = service.createAnswer(answer);
-   		model.addAttribute("map", result);
-   		return "view/answer";
+   	public String createAnswer(@ModelAttribute @Validated DataForm2 answer, Model model){
+       	service.createAnswer(answer);
+
+   		return "view/answerRes";
 
    	}
 

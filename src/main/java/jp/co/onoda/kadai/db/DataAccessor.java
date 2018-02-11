@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import jp.co.onoda.kadai.form.answer;
+
 @Configuration
 public class DataAccessor {
 
@@ -51,20 +53,22 @@ public class DataAccessor {
 		return count;
 	}
 
-	public String insertAnswerDATA(String eventID,String userID, String[] eventDate,String answer){
+	public String insertAnswerDATA(String eventID,String userID, String[] eventDate, List<answer> radio){
+
 
 		for(int i=0; i<eventDate.length; i++) {
 		jdbcTemplate.update("INSERT INTO ANSWER_DATA(EVENT_ID,USER_ID,SET_DATE,ANSWER) VALUES(SEQ_EVENT_ID.currval,SEQ_USER_ID.currval,?,?)",
-				eventDate[i],answer);
+				eventDate[i],radio.get(i).getRadiobutton());
 		}
+
 		return null;
 	}
 
 
 
 
-	public Map<String, Object> getEventData(String eventName) {
-		Map<String, Object> row = jdbcTemplate.queryForMap("SELECT EVENT_ID FROM EVENT_DATA WHERE EVENT_NAME=?", eventName);
+	public Map<String, Object> getEventData(String eventName,String Remarks) {
+		Map<String, Object> row = jdbcTemplate.queryForMap("SELECT EVENT_ID FROM EVENT_DATA WHERE EVENT_NAME=? AND REMARKS=?", eventName,Remarks);
 		return row;
 	}
 
@@ -78,9 +82,5 @@ public class DataAccessor {
 		return list;
 	}
 
-	public Map<String, Object> getUserData(String userName) {
-		Map<String, Object> row = jdbcTemplate.queryForMap("SELECT USER_NAME FROM EVENT_DATA WHERE EVENT_ID=?", userName);
-		return row;
-	}
 
 }

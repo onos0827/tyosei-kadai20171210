@@ -26,7 +26,7 @@ public class DataServiceImpl implements DataService {
 				eventdata.getEventId(), eventdata.getEventName(), eventdata.getRemarks());
 		 accessor.insertEventDATE(
 					eventdata.getEventId(), eventdata.getEventDate());
-		Map<String, Object> row = accessor.getEventData(eventdata.getEventName());
+		Map<String, Object> row = accessor.getEventData(eventdata.getEventName(), eventdata.getRemarks());
 		return row;
 	}
 
@@ -49,9 +49,9 @@ public class DataServiceImpl implements DataService {
 		 accessor.insertUserDATA(
 				 answer.geteventID(), answer.getuserID(), answer.getuserName(),answer.getuserRemarks());
 
-	//	accessor.insertAnswerDATA(
-	//			 answer.geteventID(), answer.getuserID(), answer.geteventDate(),answer.getAnswer());
-	//	 Map<String, Object> row = accessor.getEventData(answer.getuserName());
+		accessor.insertAnswerDATA(
+				 answer.geteventID(), answer.getuserID(), answer.geteventDate(),answer.getRadio());
+
 		 return null;
 
 	}

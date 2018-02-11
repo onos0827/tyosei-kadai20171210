@@ -6,7 +6,7 @@
 </head>
 <body>
 	<form action="#" th:action="@{/view/createAnswer}" th:object="${inputForm2}" method="post">
-	    <input type="hidden" th:field="${eventID}" />
+	    <input type="hidden" th:value="${eventID}" name="eventID" />
 		イベント名:<br><span th:text="${map.get('EVENT_NAME')}"></span></br>
 		<br></br>
 		イベントメモ:<br><span th:text="${map.get('REMARKS')}"></span></br>
@@ -14,17 +14,19 @@
 	    氏名登録: <br><input type="text" th:field="*{userName}"/></br>
 		<br></br>
 
-		<div th:each="setdate,stat : ${date}">
-		<span th:text="${stat.index}" ></span>
-	    <p>候補日: <span th:text="${setdate.get('SET_DATE')}"></span>
-		<label><input type="radio" name="${stat.index}" value="〇" th:field="*{Radiobutton}"  />〇</label>
-		<label><input type="radio" name="${stat.index}"  value="△" th:field="*{Radiobutton}"/>△</label>
-		<label><input type="radio" name="${stat.index}"  value="×" th:field="*{Radiobutton}"/>×</label>
-		</p>
+		<div th:each="setdate,stat : ${radio}">
+		<span th:text="${setdate.key}" ></span>
+		<input type="hidden" th:value="${setdate.key}" name="eventDate" />
+		<label><input type="radio" value="〇" th:field="*{radio[__${stat.index}__].Radiobutton}"  />〇</label>
+		<label><input type="radio" value="△" th:field="*{radio[__${stat.index}__].Radiobutton}"/>△</label>
+		<label><input type="radio" value="×" th:field="*{radio[__${stat.index}__].Radiobutton}"/>×</label>
+
 		</div>
 		<p>コメント:<br><textarea th:field="*{userRemarks}" rows="8" cols="40">コメントを入力。</textarea></br></p>
+
 		<p><input type="submit" value="出欠登録" /> <input type="reset" value="リセット" /></p>
 	</form>
 </body>
 </html>
 th:field="*{Radiobutton}"
+"*{date[__${stat.index}__].Radiobutton}"
