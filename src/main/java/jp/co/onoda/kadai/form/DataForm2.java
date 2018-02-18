@@ -5,8 +5,7 @@ import java.util.List;
 
 //DATA
 public class DataForm2 {
-
-
+	private String eventName;
 
 	private String eventID;
 
@@ -22,6 +21,14 @@ public class DataForm2 {
 
 
 
+
+	public String getEventName() {
+		return eventName;
+	}
+
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
+	}
 
 	public String[] geteventDate() {
 		return eventDate;

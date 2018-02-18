@@ -56,8 +56,16 @@ public class DataController {
 	}
 
 	@RequestMapping("/view/answerRes")
-	public String list(Model model){
-		model.addAttribute("resultForm", new DataForm());
+	public String list(@ModelAttribute @Validated DataForm2 answer,String eventID,Model model){
+		Map<String, Object> result = service.get(eventID);
+		model.addAttribute("event", result);
+		List<Map<String, Object>> listanswer = service.getAnswerData(eventID);
+       	List<Map<String, Object>> listanswer2 = service.getAnswerData2(eventID);
+    	List<Map<String, Object>> userRemarks = service.getUserRemarks(eventID);
+    	model.addAttribute("listanswer", listanswer);
+       	model.addAttribute("listanswer2", listanswer2);
+       	model.addAttribute("userRemarks", userRemarks);
+       	model.addAttribute("event", result);
 		return "view/answerRes";
 	}
 
@@ -67,13 +75,21 @@ public class DataController {
     	Collection<Object> IDD = ID.values();
     	String URL = "http://localhost:8080/view/answer/" + IDD.toString();
 		model.addAttribute("URL", URL);
+		model.addAttribute("ID", ID);
 		return "view/select";
 	}
 
     @PostMapping("/view/createAnswer")
-   	public String createAnswer(@ModelAttribute @Validated DataForm2 answer, Model model){
+   	public String createAnswer(@ModelAttribute @Validated DataForm2 answer,String eventID, Model model){
        	service.createAnswer(answer);
-
+       	Map<String, Object> result = service.get(eventID);
+       	List<Map<String, Object>> listanswer = service.getAnswerData(eventID);
+       	List<Map<String, Object>> listanswer2 = service.getAnswerData2(eventID);
+    	List<Map<String, Object>> userRemarks = service.getUserRemarks(eventID);
+       	model.addAttribute("listanswer", listanswer);
+       	model.addAttribute("listanswer2", listanswer2);
+       	model.addAttribute("userRemarks", userRemarks);
+       	model.addAttribute("event", result);
    		return "view/answerRes";
 
    	}

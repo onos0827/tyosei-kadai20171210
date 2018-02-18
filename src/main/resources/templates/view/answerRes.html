@@ -1,15 +1,60 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org">
+<script type="text/javascript" th:inline="javascript">
+
+
+</script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style type="text/css">
+    .list th {
+      background-color: #cccccc;
+      padding: 5px;
+    }
+    .list td {
+      padding: 5px;
+    }
+  </style>
 </head>
 <body>
+		イベント名:<br><span th:text="${event.EVENT_NAME}"></span></br>
+		コメント:<br><span th:text="${event.REMARKS}"></span></br>
+		<br></br>
 
-<table>
-  <tr>
-    <th>出欠参照画面（仮</th>
-  </tr>
+<table class="list" align="left">
+<tr>
+      <th>候補日</th>
+      <th>回答</th>
+      <th>集計</th>
+    </tr>
+    <tr th:each="list:${listanswer}">
+      <td th:text="${list.SET_DATE}" rowspan="1">xx</td>
+      <td th:text="${list.ANSWER}">name</td>
+      <td th:text="${list.ANSWER_COUNT}">name</td>
+    </tr>
+    </table>
+    <table class="list">
+<tr >
+      <th>候補日</th>
+      <th>名前</th>
+      <th>回答</th>
+    </tr>
+    <tr th:each="list2:${listanswer2}">
+      <td th:text="${list2.SET_DATE}">xx</td>
+      <td th:text="${list2.USER_NAME}" rowspan="1">name</td>
+      <td th:text="${list2.ANSWER}">name</td>
+    </tr>
+</table>
+    <table class="list">
+<tr >
+      <th>名前</th>
+      <th>コメント</th>
+    </tr>
+    <tr th:each="remarks:${userRemarks}">
+      <td th:text="${remarks.USER_NAME}">xx</td>
+      <td th:text="${remarks.USER_REMARKS}" rowspan="1">name</td>
+    </tr>
 </table>
 </body>
 </html>

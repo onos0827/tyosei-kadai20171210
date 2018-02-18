@@ -13,6 +13,7 @@
     	<p>出欠回答URL：<input type="text" size="30" th:value="*{URL}" /></p>
 
 <form action="#" th:action="@{/view/answerRes}" th:object="${resultForm}" method="post">
+<input type="hidden" th:value="${ID.EVENT_ID}" name="eventID" />
 		<p><input type="submit" value="出欠参照画面へ" /></p>
 </form>
 </body>

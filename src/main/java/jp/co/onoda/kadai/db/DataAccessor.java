@@ -82,5 +82,24 @@ public class DataAccessor {
 		return list;
 	}
 
+	public List<Map<String,Object> >getAnswerData(String eventID) {
+		List<Map<String, Object>> list = jdbcTemplate.queryForList("select SET_DATE,ANSWER,count(ANSWER) as ANSWER_COUNT from ANSWER_DATA where EVENT_ID = ? group by(SET_DATE,ANSWER) order by SET_DATE,ANSWER desc", eventID);
+		return list;
+	}
+
+	public List<Map<String,Object> >getAnswerData2(String eventID) {
+		List<Map<String, Object>> list = jdbcTemplate.queryForList("select DISTINCT SET_DATE,USER_NAME,ANSWER from USER_DATA a\r\n" +
+				"inner join ANSWER_DATA b on a.EVENT_ID = b.EVENT_ID  \r\n" +
+				"and a.USER_ID = b.USER_ID \r\n" +
+				"where b.EVENT_ID = ?\r\n" +
+				"order by USER_NAME,SET_DATE",eventID);
+		return list;
+	}
+
+	public List<Map<String,Object> >getUserRemarks(String eventID) {
+		List<Map<String, Object>> list = jdbcTemplate.queryForList("select USER_NAME,USER_REMARKS from USER_DATA where EVENT_ID = ?", eventID);
+		return list;
+	}
+
 
 }

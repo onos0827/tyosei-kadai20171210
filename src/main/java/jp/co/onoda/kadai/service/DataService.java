@@ -20,5 +20,11 @@ public interface DataService {
 
 	public  List<Map<String, Object>> getdate(String eventID);
 
+	public  List<Map<String, Object>> getAnswerData(String eventID);
+
+	public  List<Map<String, Object>> getAnswerData2(String eventID);
+
+	public  List<Map<String, Object>> getUserRemarks(String eventID);
+
 
 }

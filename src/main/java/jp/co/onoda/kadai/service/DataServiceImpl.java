@@ -42,6 +42,25 @@ public class DataServiceImpl implements DataService {
 		return listdate;
 	}
 
+	@Override
+	public List<Map<String, Object>> getAnswerData(String eventID) {
+		List<Map<String, Object>> listanswer = accessor.getAnswerData(eventID);
+		return listanswer;
+	}
+
+	@Override
+	public List<Map<String, Object>> getAnswerData2(String eventID) {
+		List<Map<String, Object>> listanswer2 = accessor.getAnswerData2(eventID);
+		return listanswer2;
+	}
+
+	@Override
+	public List<Map<String, Object>> getUserRemarks(String eventID) {
+		List<Map<String, Object>> userRemarks = accessor.getUserRemarks(eventID);
+		return userRemarks;
+	}
+
+
 
 
 	@Override
@@ -53,6 +72,7 @@ public class DataServiceImpl implements DataService {
 				 answer.geteventID(), answer.getuserID(), answer.geteventDate(),answer.getRadio());
 
 		 return null;
+
 
 	}
 
