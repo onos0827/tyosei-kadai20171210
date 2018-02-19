@@ -25,13 +25,15 @@
 <table class="list" align="left">
 <tr>
       <th>候補日</th>
-      <th>回答</th>
-      <th>集計</th>
+      <th>〇</th>
+      <th>△</th>
+      <th>×</th>
     </tr>
     <tr th:each="list:${listanswer}">
       <td th:text="${list.SET_DATE}" rowspan="1">xx</td>
-      <td th:text="${list.ANSWER}">name</td>
-      <td th:text="${list.ANSWER_COUNT}">name</td>
+      <td th:text="${list.MARU}">name</td>
+      <td th:text="${list.SANKAKU}">name</td>
+      <td th:text="${list.BATU}">name</td>
     </tr>
     </table>
     <table class="list">

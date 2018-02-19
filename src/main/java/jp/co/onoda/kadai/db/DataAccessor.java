@@ -83,7 +83,28 @@ public class DataAccessor {
 	}
 
 	public List<Map<String,Object> >getAnswerData(String eventID) {
-		List<Map<String, Object>> list = jdbcTemplate.queryForList("select SET_DATE,ANSWER,count(ANSWER) as ANSWER_COUNT from ANSWER_DATA where EVENT_ID = ? group by(SET_DATE,ANSWER) order by SET_DATE,ANSWER desc", eventID);
+		List<Map<String, Object>> list = jdbcTemplate.queryForList("select DISTINCT A.SET_DATE,B.MARU,D.SANKAKU,C.BATU from ANSWER_DATA  A\r\n" +
+				"left outer join(\r\n" +
+				"select SET_DATE,count(ANSWER) as MARU from ANSWER_DATA \r\n" +
+				"group by(SET_DATE,ANSWER)\r\n" +
+				"having ANSWER IN('〇')\r\n" +
+				") AS B\r\n" +
+				"on A.SET_DATE = B.SET_DATE\r\n" +
+				"left outer join(\r\n" +
+				"select SET_DATE,count(ANSWER) as BATU from ANSWER_DATA \r\n" +
+				"group by(SET_DATE,ANSWER)\r\n" +
+				"having ANSWER IN('×')\r\n" +
+				") AS C\r\n" +
+				"on A.SET_DATE = C.SET_DATE\r\n" +
+				"left outer join(\r\n" +
+				"select SET_DATE,count(ANSWER) as SANKAKU from ANSWER_DATA \r\n" +
+				"group by(SET_DATE,ANSWER)\r\n" +
+				"having ANSWER IN('△')\r\n" +
+				") AS D\r\n" +
+				"on A.SET_DATE = D.SET_DATE\r\n" +
+				"where EVENT_ID = ?\r\n" +
+				"group by(A.SET_DATE,A.ANSWER)\r\n" +
+				"order by SET_DATE",eventID);
 		return list;
 	}
 

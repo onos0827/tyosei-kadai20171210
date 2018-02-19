@@ -81,7 +81,7 @@ public class DataController {
 
     @PostMapping("/view/createAnswer")
    	public String createAnswer(@ModelAttribute @Validated DataForm2 answer,String eventID, Model model){
-       	service.createAnswer(answer);
+       //	service.createAnswer(answer);
        	Map<String, Object> result = service.get(eventID);
        	List<Map<String, Object>> listanswer = service.getAnswerData(eventID);
        	List<Map<String, Object>> listanswer2 = service.getAnswerData2(eventID);
