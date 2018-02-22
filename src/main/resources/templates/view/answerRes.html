@@ -37,26 +37,12 @@
     </tr>
     </table>
     <table class="list">
-<tr >
-      <th>候補日</th>
-      <th>名前</th>
-      <th>回答</th>
+<th th:text="${user.USER_NAME}" th:each="user:${userRemarks}"/>
+   <tbody th:each="map : ${map}">
+	<tr>
+	<td th:text="${answer}" th:each="answer : ${map.value}" />
     </tr>
-    <tr th:each="list2:${listanswer2}">
-      <td th:text="${list2.SET_DATE}">xx</td>
-      <td th:text="${list2.USER_NAME}" rowspan="1">name</td>
-      <td th:text="${list2.ANSWER}">name</td>
-    </tr>
-</table>
-    <table class="list">
-<tr >
-      <th>名前</th>
-      <th>コメント</th>
-    </tr>
-    <tr th:each="remarks:${userRemarks}">
-      <td th:text="${remarks.USER_NAME}">xx</td>
-      <td th:text="${remarks.USER_REMARKS}" rowspan="1">name</td>
-    </tr>
+    </tbody>
 </table>
 </body>
 </html>

@@ -118,7 +118,26 @@ public class DataAccessor {
 	}
 
 	public List<Map<String,Object> >getUserRemarks(String eventID) {
-		List<Map<String, Object>> list = jdbcTemplate.queryForList("select USER_NAME,USER_REMARKS from USER_DATA where EVENT_ID = ?", eventID);
+		List<Map<String, Object>> list = jdbcTemplate.queryForList("select USER_NAME,USER_REMARKS from USER_DATA where EVENT_ID = ? order by USER_ID", eventID);
+		return list;
+	}
+
+	public List<Map<String,Object> >getUserRemarks2(String eventID) {
+		List<Map<String, Object>> list = jdbcTemplate.queryForList("SELECT USER_REMARKS FROM USER_DATA \r\n" +
+				"where EVENT_ID = ?\r\n" +
+				"order by USER_ID", eventID);
+		return list;
+	}
+
+	public List<Map<String, Object>> getDateAns(String eventID) {
+		List<Map<String,Object>> list = jdbcTemplate.queryForList("select ANSWER from(\r\n" +
+				"select DISTINCT SET_DATE,A.USER_ID,USER_NAME,ANSWER from USER_DATA A\r\n" +
+				"inner join ANSWER_DATA b on a.EVENT_ID = b.EVENT_ID \r\n" +
+				"and a.USER_ID = b.USER_ID\r\n" +
+				"where b.EVENT_ID = ?\r\n" +
+				"order by SET_DATE,USER_ID\r\n" +
+				")\r\n" +
+				"", eventID);
 		return list;
 	}
 

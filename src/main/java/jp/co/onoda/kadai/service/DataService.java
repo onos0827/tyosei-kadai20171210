@@ -26,5 +26,9 @@ public interface DataService {
 
 	public  List<Map<String, Object>> getUserRemarks(String eventID);
 
+	public  List<Map<String, Object>> getUserRemarks2(String eventID);
+
+	public List<Map<String, Object>> getDateAns(String eventID);
+
 
 }

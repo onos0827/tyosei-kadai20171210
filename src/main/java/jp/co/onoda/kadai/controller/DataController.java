@@ -1,5 +1,6 @@
 package jp.co.onoda.kadai.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -57,13 +58,30 @@ public class DataController {
 
 	@RequestMapping("/view/answerRes")
 	public String list(@ModelAttribute @Validated DataForm2 answer,String eventID,Model model){
-		Map<String, Object> result = service.get(eventID);
-		model.addAttribute("event", result);
-		List<Map<String, Object>> listanswer = service.getAnswerData(eventID);
-       	List<Map<String, Object>> listanswer2 = service.getAnswerData2(eventID);
-    	List<Map<String, Object>> userRemarks = service.getUserRemarks(eventID);
-    	model.addAttribute("listanswer", listanswer);
-       	model.addAttribute("listanswer2", listanswer2);
+	 	Map<String, Object> result = service.get(eventID);
+    	List<Map<String, Object>> dateans = service.getDateAns(eventID);
+    	List<Map<String, Object>> resultdate = service.getdate(eventID);
+    	List<Map<String, Object>> listanswer = service.getAnswerData(eventID);
+     	List<Map<String, Object>> userRemarks = service.getUserRemarks(eventID);
+     	List<Map<String, Object>> comments = service.getUserRemarks2(eventID);
+     	List<String> com = new ArrayList<>();
+    	Map<String, List<String>> map = new LinkedHashMap<>();
+    	int count =0;
+    	for(int i=0; i<resultdate.size(); i++) {
+    		List<String> aaa = new ArrayList<>();
+    		for(int p=0; p<userRemarks.size(); p++) {
+    			aaa.add(dateans.get(count).values().toString());
+    			count++;
+    		}
+    		map.put(resultdate.get(i).values().toString(), aaa);
+    	}
+
+    	for(int i=0; i<comments.size(); i++) {
+			com.add(comments.get(i).values().toString());
+		}
+    	map.put("comments",com );
+       	model.addAttribute("listanswer", listanswer);
+       	model.addAttribute("map", map);
        	model.addAttribute("userRemarks", userRemarks);
        	model.addAttribute("event", result);
 		return "view/answerRes";
@@ -81,13 +99,31 @@ public class DataController {
 
     @PostMapping("/view/createAnswer")
    	public String createAnswer(@ModelAttribute @Validated DataForm2 answer,String eventID, Model model){
-       //	service.createAnswer(answer);
+       	service.createAnswer(answer);
        	Map<String, Object> result = service.get(eventID);
-       	List<Map<String, Object>> listanswer = service.getAnswerData(eventID);
-       	List<Map<String, Object>> listanswer2 = service.getAnswerData2(eventID);
-    	List<Map<String, Object>> userRemarks = service.getUserRemarks(eventID);
+    	List<Map<String, Object>> dateans = service.getDateAns(eventID);
+    	List<Map<String, Object>> resultdate = service.getdate(eventID);
+    	List<Map<String, Object>> listanswer = service.getAnswerData(eventID);
+     	List<Map<String, Object>> userRemarks = service.getUserRemarks(eventID);
+     	List<Map<String, Object>> comments = service.getUserRemarks2(eventID);
+     	List<String> com = new ArrayList<>();
+    	Map<String, List<String>> map = new LinkedHashMap<>();
+    	int count =0;
+    	for(int i=0; i<resultdate.size(); i++) {
+    		List<String> aaa = new ArrayList<>();
+    		for(int p=0; p<userRemarks.size(); p++) {
+    			aaa.add(dateans.get(count).values().toString());
+    			count++;
+    		}
+    		map.put(resultdate.get(i).values().toString(), aaa);
+    	}
+
+    	for(int i=0; i<comments.size(); i++) {
+			com.add(comments.get(i).values().toString());
+		}
+    	map.put("comments",com );
        	model.addAttribute("listanswer", listanswer);
-       	model.addAttribute("listanswer2", listanswer2);
+       	model.addAttribute("map", map);
        	model.addAttribute("userRemarks", userRemarks);
        	model.addAttribute("event", result);
    		return "view/answerRes";

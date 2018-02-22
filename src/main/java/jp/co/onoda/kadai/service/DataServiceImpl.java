@@ -61,6 +61,19 @@ public class DataServiceImpl implements DataService {
 	}
 
 
+	@Override
+	public List<Map<String, Object>> getUserRemarks2(String eventID) {
+		List<Map<String, Object>> commnets = accessor.getUserRemarks2(eventID);
+		return commnets;
+	}
+	@Override
+	public List<Map<String, Object>>getDateAns(String eventID) {
+		List<Map<String, Object>> row = accessor.getDateAns(eventID);
+		return row;
+	}
+
+
+
 
 
 	@Override
